@@ -1,6 +1,7 @@
 package com.github.curriculeon;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,6 +10,7 @@ import java.util.List;
 public class Document implements DocumentInterface {
 
     private final FileWriter fileWriter;
+    private final FileReader fileReader;
     private final File file;
 
     public Document(String fileName) throws IOException {
@@ -18,14 +20,27 @@ public class Document implements DocumentInterface {
     public Document(File file) throws IOException {
         this.file = file;
         this.fileWriter = new FileWriter(file);
+        this.fileReader=new FileReader(file);
     }
 
     @Override
     public void write(String contentToBeWritten) {
+
+        try {
+                fileWriter.write(contentToBeWritten);
+                fileWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
+
+
 
     @Override
     public void write(Integer lineNumber, String valueToBeWritten) {
+
+
     }
 
     @Override
@@ -35,7 +50,17 @@ public class Document implements DocumentInterface {
 
     @Override
     public String read() {
-        return null;
+        int charRead;
+        String readFile="";
+        try {
+            while ((charRead = fileReader.read()) != -1) {
+                readFile += "" + ((char) charRead);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return readFile;
     }
 
     @Override

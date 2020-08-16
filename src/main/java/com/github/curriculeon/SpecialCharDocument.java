@@ -12,9 +12,12 @@ public class SpecialCharDocument extends Document {
 
     @Override
     public void write(String contentToBeWritten) {
+        if (isSpecialCharacters(contentToBeWritten)) {
+            super.write(contentToBeWritten);
+        }
     }
 
     private Boolean isSpecialCharacters(String s) {
-        return null;
+        return s.matches("[^A-Za-z0-9 ]");
     }
 }
