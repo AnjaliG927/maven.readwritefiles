@@ -2,7 +2,10 @@ package com.github.curriculeon;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author leon on 16/11/2018.
@@ -65,6 +68,7 @@ public class Document implements DocumentInterface {
 
     @Override
     public void replaceAll(String stringToReplace, String replacementString) {
+
     }
 
     @Override
@@ -72,7 +76,9 @@ public class Document implements DocumentInterface {
     }
 
     public List<String> toList() {
-        return null;
+        String content=this.read();
+        List<String> contentList=Stream.of(content).collect(Collectors.toList());
+        return contentList;
     }
 
     @Override
